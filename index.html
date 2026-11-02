@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>크림라벨 CPV 리스트</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --border: #222;
+    --fg: #f0f0f0;
+    --fg-dim: #777;
+    --accent: #4ade80;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f7f7f7;
+      --surface: #fff;
+      --border: #e0e0e0;
+      --fg: #111;
+      --fg-dim: #888;
+      --accent: #16a34a;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f7f7f7; --surface: #fff; --border: #e0e0e0;
+    --fg: #111; --fg-dim: #888; --accent: #16a34a;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Noto Sans KR', system-ui, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding-inline: 16px;
+    padding-block: 28px 48px;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+  h1 { font-size: 20px; font-weight: 700; margin: 0 0 4px; }
+  .meta { font-size: 12px; color: var(--fg-dim); margin-bottom: 20px; }
+  .tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--fg-dim);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s;
+  }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .budget {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+  .budget-val { color: var(--accent); font-weight: 700; }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 16px;
+    align-items: center;
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 6px;
+  }
+  .row-left { min-width: 0; }
+  .id { font-weight: 700; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .link a { font-size: 11px; color: var(--fg-dim); text-decoration: none; word-break: break-all; }
+  .link a:hover { color: var(--accent); }
+  .sub { font-size: 11px; color: var(--fg-dim); margin-top: 2px; }
+  .shoot { font-size: 11px; color: var(--accent); margin-top: 3px; font-weight: 600; }
+  .row-right { display: flex; flex-direction: row; align-items: center; gap: 16px; flex-shrink: 0; }
+  .stat-block { text-align: right; }
+  .cpv { font-size: 15px; font-weight: 700; color: var(--accent); }
+  .ssp { font-size: 15px; font-weight: 700; color: var(--accent); }
+  .count { font-size: 12px; color: var(--fg-dim); margin-top: 8px; text-align: right; }
+  @media (max-width: 480px) {
+    .row { grid-template-columns: 1fr; }
+    .row-right { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+<h1>크림라벨 CPV 리스트</h1>
+<p class="meta">단계별 후보 리스트</p>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('t1')">1차</button>
+  <button class="tab-btn" onclick="showTab('t2')">2차</button>
+  <button class="tab-btn" onclick="showTab('tf')">최종</button>
+</div>
+
+<!-- 1차 -->
+<div id="t1" class="tab-panel active">
+  <div class="budget">총 단가 <span class="budget-val">3,800,000원</span> · 7명 · CPV 낮은 순</div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">mat.terview</div>
+      <div class="link"><a href="https://www.instagram.com/mat.terview/reels/" target="_blank">instagram.com/mat.terview/reels/</a></div>
+      <div class="sub">단가 250,000 · 평균조회수 1,403,962</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">0.18</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">sikhookyung</div>
+      <div class="link"><a href="https://www.instagram.com/sikhookyung/" target="_blank">instagram.com/sikhookyung/</a></div>
+      <div class="sub">단가 300,000 · 평균조회수 1,538,167</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">0.20</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">_bbangya_bbangya_</div>
+      <div class="link"><a href="https://www.instagram.com/_bbangya_bbangya_/" target="_blank">instagram.com/_bbangya_bbangya_/</a></div>
+      <div class="sub">단가 550,000 · 평균조회수 2,324,167</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">0.24</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">___foodtour</div>
+      <div class="link"><a href="https://www.instagram.com/___foodtour/" target="_blank">instagram.com/___foodtour/</a></div>
+      <div class="sub">단가 550,000 · 평균조회수 1,695,833</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">0.32</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">reneve__</div>
+      <div class="link"><a href="https://www.instagram.com/reel/Dc97OXuNrBo/" target="_blank">instagram.com/reel/Dc97OXuNrBo/</a></div>
+      <div class="sub">단가 950,000 · 평균조회수 2,271,754</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">0.42</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">musteat_official</div>
+      <div class="link"><a href="https://www.instagram.com/musteat_official/" target="_blank">instagram.com/musteat_official/</a></div>
+      <div class="sub">단가 600,000 · 평균조회수 1,336,900</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">0.45</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">dama.dessert</div>
+      <div class="link"><a href="https://www.instagram.com/dama.dessert/reels/" target="_blank">instagram.com/dama.dessert/reels/</a></div>
+      <div class="sub">단가 600,000 · 평균조회수 1,049,417</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">0.57</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <p class="count">총 7명</p>
+</div>
+
+<!-- 2차 -->
+<div id="t2" class="tab-panel">
+  <div class="budget">총 단가 <span class="budget-val">3,750,000원</span> · 7명 · CPV 낮은 순</div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">parkyeny</div>
+      <div class="link"><a href="https://www.instagram.com/reel/DZd-XhHqHtT/" target="_blank">instagram.com/reel/DZd-XhHqHtT/</a></div>
+      <div class="sub">단가 250,000 · 평균조회수 7,606,583</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">0.03</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">hey_jihye__</div>
+      <div class="link"><a href="https://www.instagram.com/hey_jihye__/" target="_blank">instagram.com/hey_jihye__/</a></div>
+      <div class="sub">단가 900,000 · 평균조회수 1,231,667</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">0.73</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">jini_zzin</div>
+      <div class="link"><a href="https://www.instagram.com/jini_zzin/" target="_blank">instagram.com/jini_zzin/</a></div>
+      <div class="sub">단가 500,000 · 평균조회수 667,833</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">0.75</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">_ajummat</div>
+      <div class="link"><a href="https://www.instagram.com/_ajummat/" target="_blank">instagram.com/_ajummat/</a></div>
+      <div class="sub">단가 350,000 · 평균조회수 327,182</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">1.07</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">hid_zip</div>
+      <div class="link"><a href="https://www.instagram.com/hid_zip/reels/" target="_blank">instagram.com/hid_zip/reels/</a></div>
+      <div class="sub">단가 750,000 · 평균조회수 339,250</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">2.21</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">min.ddo_o</div>
+      <div class="link"><a href="https://www.instagram.com/min.ddo_o/reels/" target="_blank">instagram.com/min.ddo_o/reels/</a></div>
+      <div class="sub">단가 700,000 · 평균조회수 162,500</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">4.31</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">_foodmoa_</div>
+      <div class="link"><a href="https://www.instagram.com/_foodmoa_/" target="_blank">instagram.com/_foodmoa_/</a></div>
+      <div class="sub">단가 300,000 · 평균조회수 36,222</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="cpv">8.28</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <p class="count">총 7명</p>
+</div>
+
+<!-- 최종 -->
+<div id="tf" class="tab-panel">
+  <div class="budget">총 단가 <span class="budget-val">3,500,000원</span> · 5명</div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">dama.dessert</div>
+      <div class="link"><a href="https://www.instagram.com/dama.dessert/reels/" target="_blank">instagram.com/dama.dessert/reels/</a></div>
+      <div class="sub">단가 600,000 · 평균조회수 1,049,417</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="ssp">235원</div><div class="sub">공유+저장당</div></div>
+      <div class="stat-block"><div class="cpv">0.57</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">_bbangya_bbangya_</div>
+      <div class="link"><a href="https://www.instagram.com/_bbangya_bbangya_/" target="_blank">instagram.com/_bbangya_bbangya_/</a></div>
+      <div class="sub">단가 550,000 · 평균조회수 2,324,167</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="ssp">22원</div><div class="sub">공유+저장당</div></div>
+      <div class="stat-block"><div class="cpv">0.24</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">hey_jihye__</div>
+      <div class="link"><a href="https://www.instagram.com/hey_jihye__/" target="_blank">instagram.com/hey_jihye__/</a></div>
+      <div class="sub">단가 900,000 · 평균조회수 1,231,667</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="ssp">666원</div><div class="sub">공유+저장당</div></div>
+      <div class="stat-block"><div class="cpv">0.73</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">hid_zip</div>
+      <div class="link"><a href="https://www.instagram.com/hid_zip/reels/" target="_blank">instagram.com/hid_zip/reels/</a></div>
+      <div class="sub">단가 750,000 · 평균조회수 339,250</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="ssp">76원</div><div class="sub">공유+저장당</div></div>
+      <div class="stat-block"><div class="cpv">2.21</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-left">
+      <div class="id">min.ddo_o</div>
+      <div class="link"><a href="https://www.instagram.com/min.ddo_o/reels/" target="_blank">instagram.com/min.ddo_o/reels/</a></div>
+      <div class="sub">단가 700,000 · 평균조회수 162,500</div>
+    </div>
+    <div class="row-right">
+      <div class="stat-block"><div class="ssp">89원</div><div class="sub">공유+저장당</div></div>
+      <div class="stat-block"><div class="cpv">4.31</div><div class="sub">CPV</div></div>
+    </div>
+  </div>
+
+  <p class="count">총 5명</p>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
